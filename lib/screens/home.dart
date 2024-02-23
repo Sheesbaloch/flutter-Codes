@@ -1,6 +1,7 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:test_flutter/widgets/movies_slider.dart';
+import 'package:test_flutter/widgets/trending_slider.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -29,33 +30,32 @@ class Home extends StatelessWidget {
                   'Trending',
                   style: GoogleFonts.aBeeZee(fontSize: 25),
                 ),
-                SizedBox(
-                  height: 16,
+                const SizedBox(
+                  height: 32,
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  child: CarouselSlider.builder(
-                    itemCount: 10,
-                    options: CarouselOptions(
-                        autoPlay: true,
-                        height: 300,
-                        viewportFraction: 0.55,
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        autoPlayAnimationDuration: const Duration(seconds: 3),
-                        enlargeCenterPage: true,
-                        pageSnapping: true),
-                    itemBuilder: (context, itemIndex, pageViewIndex) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Container(
-                          width: 200,
-                          height: 300,
-                          color: Colors.amber,
-                        ),
-                      );
-                    },
-                  ),
-                )
+                const trendingSlider(),
+                const SizedBox(
+                  height: 32,
+                ),
+                Text(
+                  'Top rated Movies',
+                  style: GoogleFonts.aBeeZee(fontSize: 25),
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                const moviesSlider(),
+                const SizedBox(
+                  height: 32,
+                ),
+                Text(
+                  'Upcoming Movies',
+                  style: GoogleFonts.aBeeZee(fontSize: 25),
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                const moviesSlider(),
               ],
             ),
           ),
