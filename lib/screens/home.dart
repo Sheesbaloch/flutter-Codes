@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:test_flutter/api/api.dart';
+import 'package:test_flutter/models/movie.dart';
 import 'package:test_flutter/widgets/movies_slider.dart';
 import 'package:test_flutter/widgets/trending_slider.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  late Future<List<Movie>> trendingMovie;
+  @override
+  void initState() {
+    super.initState();
+    trendingMovie = Api().getTrendingMovies();
+  }
 
   @override
   Widget build(BuildContext context) {
