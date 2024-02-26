@@ -1,11 +1,10 @@
-import 'package:flutter/foundation.dart';
-
 class Movie {
   String title;
   String backdrop;
   String originalTitle;
   String overview;
   String releaseDate;
+  String posterPath;
   double voteAverage;
 
   Movie(
@@ -14,6 +13,7 @@ class Movie {
       required this.originalTitle,
       required this.overview,
       required this.releaseDate,
+      required this.posterPath,
       required this.voteAverage});
 
   factory Movie.fromJson(Map<String, dynamic> json) {
@@ -23,6 +23,7 @@ class Movie {
         originalTitle: json["original_title"],
         overview: json['overview'],
         releaseDate: json['release_date'],
+        posterPath: json['poster_path'],
         voteAverage: json['vote_average']);
   }
 }

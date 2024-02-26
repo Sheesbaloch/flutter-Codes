@@ -14,10 +14,15 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late Future<List<Movie>> trendingMovie;
+  late Future<List<Movie>> topRatedMovie;
+  late Future<List<Movie>> upcomingMovie;
+
   @override
   void initState() {
     super.initState();
     trendingMovie = Api().getTrendingMovies();
+    topRatedMovie = Api().getTopRatedMovies();
+    upcomingMovie = Api().getUpcomingMovies();
   }
 
   @override
@@ -47,7 +52,25 @@ class _HomeState extends State<Home> {
                 const SizedBox(
                   height: 32,
                 ),
-                const trendingSlider(),
+                SizedBox(
+                  child: FutureBuilder(
+                      future: trendingMovie,
+                      builder: ((context, snapshot) {
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Text(snapshot.error.toString()),
+                          );
+                        } else if (snapshot.hasData) {
+                          return trendingSlider(
+                            snapshot: snapshot,
+                          );
+                        } else {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      })),
+                ),
                 const SizedBox(
                   height: 32,
                 ),
@@ -58,7 +81,25 @@ class _HomeState extends State<Home> {
                 const SizedBox(
                   height: 32,
                 ),
-                const moviesSlider(),
+                SizedBox(
+                  child: FutureBuilder(
+                      future: topRatedMovie,
+                      builder: ((context, snapshot) {
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Text(snapshot.error.toString()),
+                          );
+                        } else if (snapshot.hasData) {
+                          return moviesSlider(
+                            snapshot: snapshot,
+                          );
+                        } else {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      })),
+                ),
                 const SizedBox(
                   height: 32,
                 ),
@@ -69,7 +110,25 @@ class _HomeState extends State<Home> {
                 const SizedBox(
                   height: 32,
                 ),
-                const moviesSlider(),
+                SizedBox(
+                  child: FutureBuilder(
+                      future: upcomingMovie,
+                      builder: ((context, snapshot) {
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Text(snapshot.error.toString()),
+                          );
+                        } else if (snapshot.hasData) {
+                          return moviesSlider(
+                            snapshot: snapshot,
+                          );
+                        } else {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      })),
+                ),
               ],
             ),
           ),
