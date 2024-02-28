@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:test_flutter/constants.dart';
+import 'package:test_flutter/screens/detailPage.dart';
 
 class trendingSlider extends StatelessWidget {
   const trendingSlider({
@@ -25,15 +26,24 @@ class trendingSlider extends StatelessWidget {
             enlargeCenterPage: true,
             pageSnapping: true),
         itemBuilder: (context, itemIndex, pageViewIndex) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: SizedBox(
-              width: 200,
-              height: 300,
-              child: Image.network(
-                filterQuality: FilterQuality.high,
-                fit: BoxFit.cover,
-                '${constants.imagePath}${snapshot.data[itemIndex].posterPath}',
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          detail(movie: snapshot.data[itemIndex])));
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: SizedBox(
+                width: 200,
+                height: 300,
+                child: Image.network(
+                  filterQuality: FilterQuality.high,
+                  fit: BoxFit.cover,
+                  '${constants.imagePath}${snapshot.data[itemIndex].posterPath}',
+                ),
               ),
             ),
           );
